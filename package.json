@@ -1,0 +1,31 @@
+{
+  "name": "mice",
+  "version": "1.0.0",
+  "description": "A minimal task time tracker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maddes/mice.git"
+  },
+  "keywords": [
+    "Electron",
+    "task",
+    "time",
+    "tracker"
+  ],
+  "author": "daniel@scholtus.com.ar",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/maddes/mice/issues"
+  },
+  "homepage": "https://github.com/maddes/mice",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.0"
+  }
+}
