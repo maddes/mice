@@ -7,6 +7,10 @@ This is a minimal Electron application for task time tracking.
 
 Download the corresponding binary package.
 
+Click on an item will toggle it's active state AND copy it's title.
+
+Item's cannot be removed.
+
 ## To Collaborate
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/).

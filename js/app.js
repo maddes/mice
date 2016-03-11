@@ -22,34 +22,35 @@ function MiceController ($interval) {
 	
 	// Function to toggle item and copy it's title
 	function toggleItem (item, $event) {
-		// Toggle running
-		item.running = !item.running
+		// Stop timer
+		if (item.started) {
+			// Add time elapsed to item timer
+			item.timer += ((new Date() - item.started) / 1000) | 0
+			item.started = null
+		}
+		// 
+		else {
+			item.started = new Date()
+		}
 		// Get title element
 		element = $event.currentTarget.getElementsByTagName('strong')[0]
-		// Select title content
-		var range, selection
-		if (document.body.createTextRange) {
-			range = document.body.createTextRange();
-			range.moveToElementText(element);
-			range.select();
-		} else if (window.getSelection) {
-			selection = window.getSelection();        
-			range = document.createRange();
-			range.selectNodeContents(element);
-			selection.removeAllRanges();
-			selection.addRange(range);
-		}
-		// Try to copy text
-		try {
-			console.log('Copying text: ', document.execCommand('copy'));
-		} catch (err) {
-			console.log('Oops, unable to copy');
-		}
+		// Deselect everything
+		var selection = window.getSelection()
+		selection.removeAllRanges();
+		// Select title
+		var range = document.createRange();
+		range.selectNodeContents(element);
+		selection.addRange(range);
+		// Copy text
+		document.execCommand('copy');
+		// Deselect everything
+		selection.removeAllRanges();
 	}
 	
 	// Function to add items to the list
 	function addItem () {
 		if (vm.newItem.title) {
+			vm.newItem.started = new Date()
 			vm.items.push(vm.newItem)
 			resetNewItem()
 		}
@@ -60,15 +61,17 @@ function MiceController ($interval) {
 		vm.newItem = {
 			title: '',
 			timer: 0,
-			running: true
+			current: 0,
+			started: null
 		}
 	}
 
 	// This will ran on a loop to update timers continuously
 	function updateTimers () {
+		var newDate = new Date()
 		vm.items.forEach(function (item) {
-			if (item.running) {
-				item.timer++
+			if (item.started) {
+				item.current = item.timer + (((newDate - item.started) / 1000) | 0)
 			}
 		})
 	}

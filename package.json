@@ -1,6 +1,6 @@
 {
   "name": "mice",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A minimal task time tracker",
   "main": "main.js",
   "scripts": {

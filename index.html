@@ -29,12 +29,12 @@
 					</form>
 				</li>
 				<li class="list-group-item" 
-					ng-repeat="item in mice.items" 
-					ng-class="{active: item.running}"
+					ng-repeat="item in mice.items | orderBy: 'title'" 
+					ng-class="{active: item.started}"
 					ng-click="mice.toggleItem(item, $event)">
 					<div class="media-body">
 						<strong>{{ item.title }}</strong>
-						<p>{{ item.timer | toHumanTime }}</p>
+						<p>{{ item.current | toHumanTime }}</p>
 					</div>
 				</li>
 			</ul>
