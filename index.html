@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="mice">
+
+<head>
+	<title>Mice</title>
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/photon.min.css">
+	<style>
+		* {
+			cursor: initial;
+			-webkit-user-select: initial;
+		}
+	</style>
+	
+	<!-- Javascript -->
+	<script src="node_modules/angular/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/menu.js"></script>
+</head>
+
+<body>
+	<div class="window">		
+		<div class="window-content" ng-controller="MiceController as mice">
+			<ul class="list-group">
+				<li class="list-group-header sidebar">
+					<form ng-submit="mice.addItem()">
+						<input ng-model="mice.newItem.title" class="form-control" type="text" placeholder="Add item...">
+					</form>
+				</li>
+				<li class="list-group-item" 
+					ng-repeat="item in mice.items" 
+					ng-class="{active: item.running}"
+					ng-click="mice.toggleItem(item, $event)">
+					<div class="media-body">
+						<strong>{{ item.title }}</strong>
+						<p>{{ item.timer | toHumanTime }}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>
